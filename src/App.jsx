@@ -1,28 +1,33 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import Hero3D from './components/Hero3D';
+import MonkeyStatus from './components/MonkeyStatus';
+import AlphabetGame from './components/AlphabetGame';
+import BananaBar from './components/BananaBar';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [bananas, setBananas] = useState(0);
+
+  const handleEarnBanana = () => setBananas((b) => b + 1);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-gradient-to-b from-white to-orange-50 text-orange-900">
+      <div className="mx-auto max-w-[1200px] px-4 md:px-6 lg:px-8 py-6 md:py-8">
+        <Hero3D />
+
+        <div className="mt-6 md:mt-8 grid md:grid-cols-5 gap-6">
+          <div className="md:col-span-2">
+            <MonkeyStatus bananas={bananas} />
+            <BananaBar bananas={bananas} />
+          </div>
+          <div className="md:col-span-3">
+            <AlphabetGame onEarnBanana={handleEarnBanana} />
+          </div>
         </div>
+
+        <footer className="mt-10 md:mt-16 text-center text-xs md:text-sm text-orange-800/60">
+          Designed for 1512 x 982 screens · Playful micro-interactions · 3D hero powered by Spline
+        </footer>
       </div>
     </div>
-  )
+  );
 }
-
-export default App
